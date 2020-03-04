@@ -20,7 +20,7 @@ class ImagespiderPipeline(ImagesPipeline):
         for image_url in item['imgurl']:
             yield Request(image_url)
 
-    # def file_path(self, request, response=None, info=None):
-    #     # 重命名，若不重写这函数，图片名为哈希，就是一串乱七八糟的名字
-    #     image_guid = request.url.split('/')[-1]  # 提取url前面名称作为图片名。
-    #     return image_guid
+    def file_path(self, request, response=None, info=None):
+        # 重命名，若不重写这函数，图片名为哈希，就是一串乱七八糟的名字
+        image_guid = request.url.split('/')[-1]  # 提取url前面名称作为图片名。
+        return image_guid
