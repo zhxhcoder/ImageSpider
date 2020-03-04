@@ -1,11 +1,26 @@
 # -*- coding: utf-8 -*-
+"""
+功能：本项目主要演示Scrapy下载图片；
+运行方式：进入ImageSpider目录（scrapy.cfg所在目录)输入：
 
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+scrapy crawl ImgSpider
+
+项目详情：http://www.scrapyd.cn/example/174.html；
+创建时间：2018年2月28日12:47:46
+创建者：scrapy中文网（http://www.scrapyd.cn）；
+"""
+from scrapy import Request
+from scrapy.pipelines.images import ImagesPipeline
 
 
-class ImagespiderPipeline(object):
-    def process_item(self, item, spider):
-        return item
+class ImagespiderPipeline(ImagesPipeline):
+
+    def get_media_requests(self, item, info):
+        # 循环每一张图片地址下载，若传过来的不是集合则无需循环直接yield
+        for image_url in item['imgurl']:
+            yield Request(image_url)
+
+    # def file_path(self, request, response=None, info=None):
+    #     # 重命名，若不重写这函数，图片名为哈希，就是一串乱七八糟的名字
+    #     image_guid = request.url.split('/')[-1]  # 提取url前面名称作为图片名。
+    #     return image_guid
