@@ -55,7 +55,7 @@ class ImagespiderPipeline(ImagesPipeline):
 
 万事俱备，接下来就启动我们的下载中间件，还有一个问题，那图片存在哪里呢？scrapy给我们提供了一个常量：IMAGES_STORE，我们只需要在settings.py里面设置即可，来我们看一下settings里面的设置：
 #图片存储位置
-IMAGES_STORE = 'D:\ImageSpider'
+IMAGES_STORE = '/Users/xhzh/scrapy/pic'
 #启动图片下载中间件
 ITEM_PIPELINES = {
    'ImageSpider.pipelines.ImagespiderPipeline': 300,
